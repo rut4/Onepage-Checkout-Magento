@@ -1,0 +1,92 @@
+<?php
+/**
+ * Oggetto Web checkout extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Oggetto OnepageCheckout module to newer versions in the future.
+ * If you wish to customize the Oggetto OnepageCheckout module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design
+ * @package    rwd_default
+ * @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * @var Mage_Checkout_Block_Onepage_Shipping_Method_Available $this
+ * @var Oggetto_OnepageCheckout_Helper_Data $_helper
+ */
+?>
+
+<?php
+    $_helper = $this->helper('onepageCheckout');
+    $_shippingRateGroups = $this->getShippingRates();
+    $_mustToCheckMethod = $this->getAddressShippingMethod();
+    if (!$_mustToCheckMethod) {
+        $_mustToCheckMethod = $_helper->getDefaultShippingMethod();
+    }
+    if ($_shippingRateGroups && $_helper->shouldShowFreeShippingOnly()) {
+        if (isset($_shippingRateGroups['freeshipping'])) {
+            $_shippingRateGroups = [
+                'freeshipping' => $_shippingRateGroups['freeshipping']
+            ];
+        }
+    }
+?>
+
+<?php if (!$_shippingRateGroups): ?>
+    <p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
+<?php else: ?>
+    <dl class="sp-methods">
+    <?php $shippingCodePrice = array(); ?>
+    <?php $_sole = count($_shippingRateGroups) == 1; foreach ($_shippingRateGroups as $code => $_rates): ?>
+        <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?></dt>
+        <dd>
+            <ul>
+            <?php $_sole = $_sole && count($_rates) == 1; foreach ($_rates as $_rate): ?>
+                <?php $shippingCodePrice[] = "'".$_rate->getCode()."':".(float)$_rate->getPrice(); ?>
+                <li>
+                   <?php if ($_rate->getErrorMessage()): ?>
+                    <ul class="messages"><li class="error-msg"><ul><li><?php echo $this->escapeHtml($_rate->getErrorMessage()) ?></li></ul></li></ul>
+                   <?php else: ?>
+                        <?php if ($_sole) : ?>
+                        <span class="no-display"><input class="sp-method" name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>" checked="checked" /></span>
+                        <?php else: ?>
+                        <input class="sp-method radio" name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"
+                            <?php if ($_mustToCheckMethod == $_rate->getCode()): echo 'checked="checked"'; endif; ?> />
+
+                        <?php if ($_rate->getCode() === $_mustToCheckMethod): ?>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                                lastPrice = <?php echo (float)$_rate->getPrice(); ?>;
+                            //]]>
+                        </script>
+                        <?php endif; ?>
+
+                        <?php endif; ?>
+                        <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $this->escapeHtml($_rate->getMethodTitle()) ?>
+                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                        <?php endif; ?>
+                        </label>
+                   <?php endif ?>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+        </dd>
+    <?php endforeach; ?>
+    </dl>
+<?php endif; ?>

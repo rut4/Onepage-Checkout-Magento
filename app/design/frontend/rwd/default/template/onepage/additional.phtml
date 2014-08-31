@@ -1,0 +1,53 @@
+<?php
+/**
+ * Oggetto Web checkout extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Oggetto OnepageCheckout module to newer versions in the future.
+ * If you wish to customize the Oggetto OnepageCheckout module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design
+ * @package    rwd_default
+ * @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/** @var Oggetto_OnepageCheckout_Block_Onepage_Additional $this */
+?>
+<?php $fields = $this->getFields(); ?>
+<?php if (count($fields)): ?>
+    <h2 class="block__title"><?php echo $this->__('Additional Information'); ?></h2>
+    <?php foreach ($fields as $field): ?>
+        <input name="additional[<?php echo $field['name'] ?>][label]" value="<?php echo $field['label'] ?>" type="hidden"/>
+        <div class="form__row">
+            <label for="<?php echo $field['name'] ?>" class="<?php if ($field['show'] == 'req') { echo 'required'; } ?>"><?php echo $field['label']; ?>
+            <?php if ($field['type'] == 'textarea'): ?>
+                </label>
+                <textarea class="input-text input input_textarea" name="additional[<?php echo $field['name']; ?>][value]" id="<?php echo $field['name'] ?>"></textarea>
+            <?php elseif ($field['type'] == 'boolean'): ?>
+                <input class="checkbox input input_checkbox" type="checkbox" name="additional[<?php echo $field['name']; ?>][value]" id="additional[<?php echo $field['name']; ?>"/>
+                </label>
+            <?php elseif ($field['type'] == 'select'): ?>
+                </label>
+                <select class="input input_select" name="additional[<?php echo $field['name']; ?>][value]" id="<?php echo $field['name']; ?>"
+                       <?php if ($field['type'] == 'multiselect') echo 'multiple'; ?>>
+                    <?php foreach ($field['options'] as $option): ?>
+                        <option value="<?php echo $option; ?>"><?php echo $option; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php else: ?>
+                </label>
+                <input class="input input-text" type="<?php echo $field['type']; ?>" name="additional[<?php echo $field['name']; ?>][value]" id="<?php echo $field['name']; ?>" />
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>

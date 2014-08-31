@@ -1,0 +1,93 @@
+/**
+ * Oggetto Web checkout extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Oggetto OnepageCheckout module to newer versions in the future.
+ * If you wish to customize the Oggetto OnepageCheckout module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design
+ * @package    rwd_default
+ * @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+.col-main {
+    width: auto !important;
+}
+
+.onepage-wrapper {
+    width: 1125px;
+    max-width: 100%;
+    margin: auto;
+}
+
+.loader {
+    background: url('../images/ajax-loader.gif') no-repeat 50%;
+    display: block;
+    width: 100%;
+    height: 20px;
+}
+
+.main-loader {
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    width: 220px;
+}
+
+.column {
+    float: left;
+    margin-right: 5%;
+}
+
+.column:last-child {
+    margin-right: 0;
+}
+
+.block__title {
+    font-size: 1.2em;
+}
+
+.input {
+    display: block;
+    margin: 3px 0;
+}
+
+.input_checkbox,
+.input_radio {
+    display: inline;
+}
+
+.input_textarea {
+    width: 365px;
+    max-width: 100%;
+    resize: none;
+}
+
+.input_select {
+    width: 365px;
+    max-width: 100%;
+}
+
+.delivery-row {
+    margin-bottom: 15px;
+}
+
+.error-box {
+    font-size: 13px;
+    color: red;
+}
+
+.image-calendar {
+    display: inline;
+}

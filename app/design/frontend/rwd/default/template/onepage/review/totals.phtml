@@ -1,0 +1,56 @@
+<?php
+/**
+ * Oggetto Web checkout extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Oggetto OnepageCheckout module to newer versions in the future.
+ * If you wish to customize the Oggetto OnepageCheckout module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design
+ * @package    rwd_default
+ * @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/** @var Oggetto_OnepageCheckout_Block_Onepage_Review_Totals $this */
+?>
+<?php if ($this->getTotals()): ?>
+<tfoot id="totals">
+    <?php $_colspan = $this->helper('tax')->displayCartBothPrices() ? 5 : 3; ?>
+    <?php echo $this->renderTotals(null, $_colspan); ?>
+    <?php echo $this->renderTotals('footer', $_colspan); ?>
+    <?php if ($this->needDisplayBaseGrandtotal()):?>
+    <tr>
+        <td class="a-right" colspan="<?php echo $_colspan; ?>">
+            <small><?php echo $this->helper('sales')->__('Your credit card will be charged for'); ?></small>
+        </td>
+        <td class="a-right">
+            <small><?php echo $this->displayBaseGrandtotal(); ?></small>
+        </td>
+
+    </tr>
+    <?php endif?>
+    <input name="grand_total" id="grandTotal" type="hidden" value="<?php echo $this->helper('onepageCheckout')->getQuote()->getGrandTotal(); ?>"/>
+</tfoot>
+<?php endif; ?>
+<script type="text/javascript">
+    var totalsAjaxReloadOn = [
+        <?php if ($this->shouldReloadOnPaymentMethodChange()) echo "{'class' : 'p-method', 'block' : 'payment'}"; ?>,
+        <?php if ($this->shouldReloadOnShippingMethodChange()) echo "{'class' : 'sp-method', 'block' : 'shipping'}"; ?>,
+        <?php if ($this->shouldReloadOnCountryChange()) echo "{'id' : 'billing:country_id', 'block' : 'billing'}"; ?>,
+        <?php if ($this->shouldReloadOnPostcodeChange()) echo "{'id' : 'billing:postcode', 'block' : 'billing'}"; ?>,
+        <?php if ($this->shouldReloadOnRegionChange()) echo "{'id' : 'billing:region_id', 'block' : 'billing'}, {'id' : 'billing:region', 'block' : 'billing'}"; ?>
+    ];
+
+    totalsAjaxReloadOn = totalsAjaxReloadOn.filter(function (el) { return el; });
+</script>
