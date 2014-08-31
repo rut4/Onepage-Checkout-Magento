@@ -1,0 +1,43 @@
+<?php
+/**
+ * Oggetto Web checkout extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Oggetto OnepageCheckout module to newer versions in the future.
+ * If you wish to customize the Oggetto OnepageCheckout module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design
+ * @package    rwd_default
+ * @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<h2 class="block__title"><?php echo $this->__('Coupon Code'); ?></h2>
+<div id="discount-coupon-form" data-action="<?php echo $this->getUrl('checkout/coupon/update'); ?>" data-method="post">
+    <?php $couponApplied = (bool)$this->getCouponCode(); ?>
+    <div class="discount">
+        <div class="discount-form">
+            <label for="coupon_code"><?php echo $this->__('Enter your coupon code if you have one.') ?></label>
+            <div class="input-box">
+                <input class="input-text" id="coupon_code" name="coupon_code" value="<?php echo $this->escapeHtml($this->getCouponCode()) ?>" />
+            </div>
+            <input type="hidden" name="remove" id="remove-coupone" value="<?php echo (int)$couponApplied; ?>" />
+            <div id="buttonsSet" class="buttons-set">
+                <button id="couponCancelButton" type="button" title="<?php echo $this->__('Cancel Coupon') ?>" class="button <?php if (!$couponApplied): echo 'hidden'; endif; ?>" value="<?php echo $this->__('Cancel Coupon') ?>"><span><span><?php echo $this->__('Cancel Coupon') ?></span></span></button>
+                &nbsp;
+                <button id="couponAddButton" type="button" title="<?php echo $this->__('Apply Coupon') ?>" class="button <?php if ($couponApplied): echo 'hidden'; endif; ?>" value="<?php echo $this->__('Apply Coupon') ?>"><span><span><?php echo $this->__('Apply Coupon') ?></span></span></button>
+            </div>
+        </div>
+        <p id="couponMessage" class="hidden"></p>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<?php
+/**
+ * Oggetto Web checkout extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Oggetto OnepageCheckout module to newer versions in the future.
+ * If you wish to customize the Oggetto OnepageCheckout module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design
+ * @package    rwd_default
+ * @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+/**
+ * One page checkout payment methods
+ *
+ * @var $this Mage_Checkout_Block_Onepage_Payment_Methods
+ */
+?>
+<dl class="sp-methods" id="checkout-payment-method-load">
+<?php
+    $methods = $this->getMethods();
+    $oneMethod = count($methods) <= 1;
+    $_mustToCheckMethod = $this->getSelectedMethodCode();
+    if (!$_mustToCheckMethod) {
+        $_mustToCheckMethod = $this->helper('onepageCheckout')->getDefaultPaymentMethod();
+    }
+?>
+<?php if (empty($methods)): ?>
+    <dt>
+        <?php echo $this->__('No Payment Methods') ?>
+    </dt>
+<?php else:
+    foreach ($methods as $_method):
+        $_code = $_method->getCode();
+?>
+    <dt>
+    <?php if(!$oneMethod): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>"
+               onclick="payment.switchMethod('<?php echo $_code ?>')"
+               class="p-method radio" <?php if ($_mustToCheckMethod == $_code) echo 'checked'; ?>/>
+    <?php else: ?>
+        <span class="no-display"><input class="p-method radio" id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked /></span>
+        <?php $oneMethod = $_code; ?>
+    <?php endif; ?>
+        <label for="p_method_<?php echo $_code ?>"><?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+    </dt>
+    <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+    <dd>
+        <?php echo $html; ?>
+    </dd>
+    <?php endif; ?>
+<?php endforeach;
+    endif;
+?>
+<script type="text/javascript">
+    //<![CDATA[
+    Payment.prototype.init = function () {
+        this.beforeInit();
+        var elements = Form.getElements(this.form);
+
+        var method = null;
+        for (var i=0; i<elements.length; i++) {
+            if (elements[i].name=='payment[method]') {
+                if (elements[i].checked) {
+                    method = elements[i].value;
+                }
+            }
+        }
+        if (method) this.switchMethod(method);
+        this.afterInit();
+    }
+
+    var payment = new Payment();
+    payment.initialize($('checkoutForm'), '<?php echo $this->getUrl('onepage/payment/saveMethod'); ?>');
+    payment.init();
+    <?php if (is_string($oneMethod)): ?>
+    payment.switchMethod('<?php echo $oneMethod ?>');
+    <?php endif; ?>
+    //]]>
+</script>
+</dl>

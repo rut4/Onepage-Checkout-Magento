@@ -1,0 +1,104 @@
+<?php
+/**
+ * Oggetto Web checkout extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Oggetto OnepageCheckout module to newer versions in the future.
+ * If you wish to customize the Oggetto OnepageCheckout module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design
+ * @package    rwd_default
+ * @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * @var Oggetto_OnepageCheckout_Block_Onepage $this
+ */
+?>
+<div class="page-title">
+    <div class="loader main-loader hidden" id="mainLoader"></div>
+    <h1><?php echo $this->__($this->getTitle()); ?></h1>
+</div>
+<?php if (!$this->isModuleEnabled()): ?>
+    <p>
+        Sorry, the module is disabled. Please, use the
+        <a href="<?php echo $this->getUrl('checkout/onepage'); ?>">standard onepage</a> checkout.
+    </p>
+<?php else: ?>
+    <div id="onepageWrapper" class="onepage-wrapper">
+        <form id="checkoutForm" class="form" action="#" >
+            <?php
+                $_columnCount = $this->getColumnCount();
+                $_columnWidth = 90 / $_columnCount . '%';
+                $isQuoteVirtual = $this->isQuoteVirtual();
+                $shippingAsBilling = $this->isShippingSameAsBilling() || $this->isShippingSameAsBillingCheckedDefault();
+             ?>
+            <div class="column" style="width: <?php echo $_columnWidth; ?>">
+                <div class="error-box" id="billingErrors"></div>
+                <div class="block block_billing">
+                    <?php echo $this->getChildHtml('billing'); ?>
+                </div>
+                <?php if (!$isQuoteVirtual && $this->shouldShowShippingAddressForm()): ?>
+                    <div class="form__row">
+                        <label for="shipToBilling">
+                            <input class="input input_checkbox" type="checkbox" name="billing[use_for_shipping]"
+                                   id="shipToBilling" <?php if ($shippingAsBilling) echo 'checked'; ?> />
+                            Ship to the same address
+                        </label>
+                    </div>
+                <?php endif; ?>
+                <?php if ($_columnCount == 3): ?>
+                    </div>
+                    <div class="column" style="width: <?php echo $_columnWidth; ?>">
+                <?php endif; ?>
+
+                <div class="error-box" id="shippingErrors"></div>
+                <?php if (!$isQuoteVirtual): ?>
+                    <div class="block block_shipping <?php if ($shippingAsBilling) echo 'hidden'; ?>"
+                         id="shippingBlock">
+                        <?php echo $this->getChildHtml('shipping'); ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($_columnCount == 2): ?>
+                    </div>
+                    <div class="column" style="width: <?php echo $_columnWidth; ?>">
+                <?php endif; ?>
+                <?php if (!$isQuoteVirtual && $this->shouldShowShippingAddressForm()): ?>
+                    <div class="block block_shipping_method">
+                        <?php echo $this->getChildHtml('shipping_method'); ?>
+                    </div>
+                <?php endif; ?>
+                <div class="block block_payment">
+                    <?php echo $this->getChildHtml('payment'); ?>
+                </div>
+                <?php if ($this->shouldShowCouponField()): ?>
+                    <div class="block block_coupon">
+                        <?php echo $this->getChildHtml('coupon'); ?>
+                    </div>
+                 <?php endif; ?>
+                <?php if ($_columnCount == 3): ?>
+                    </div>
+                    <div class="column" style="width: <?php echo $_columnWidth; ?>">
+                <?php endif; ?>
+                <div class="block block_additional">
+                    <?php echo $this->getChildHtml('additional'); ?>
+                </div>
+                <div class="error-box" id="reviewErrors"></div>
+                <div class="block block_review">
+                    <?php echo $this->getChildHtml('review'); ?>
+                </div>
+            </div>
+        </form>
+    </div>
+<?php endif; ?>

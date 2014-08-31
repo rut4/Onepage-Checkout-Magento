@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Oggetto Web checkout extension for Magento
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade
+* the Oggetto OnepageCheckout module to newer versions in the future.
+* If you wish to customize the Oggetto OnepageCheckout module for your needs
+* please refer to http://www.magentocommerce.com for more information.
+*
+* @category   Oggetto
+* @package    Oggetto_OnepageCheckout
+* @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <Oggetto_OnepageCheckout>
+            <version>0.3.0</version>
+        </Oggetto_OnepageCheckout>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <onepage>
+                    <file>onepage.xml</file>
+                </onepage>
+            </updates>
+        </layout>
+        <routers>
+            <checkout>
+                <args>
+                    <modules>
+                        <Oggetto_Checkout before="Mage_Checkout">Oggetto_OnepageCheckout</Oggetto_Checkout>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+    </frontend>
+    <global>
+        <models>
+            <onepageCheckout>
+                <class>Oggetto_OnepageCheckout_Model</class>
+                <resourceModel>onepageCheckout_resource</resourceModel>
+            </onepageCheckout>
+            <onepageCheckout_resource>
+                <class>Oggetto_OnepageCheckout_Model_Resource</class>
+                <entities>
+                    <delivery>
+                        <table>delivery_date_time</table>
+                    </delivery>
+                    <customField>
+                        <table>checkout_custom_fields</table>
+                    </customField>
+                </entities>
+            </onepageCheckout_resource>
+        </models>
+        <helpers>
+            <onepageCheckout>
+                <class>Oggetto_OnepageCheckout_Helper</class>
+            </onepageCheckout>
+        </helpers>
+        <blocks>
+            <onepageCheckout>
+                <class>Oggetto_OnepageCheckout_Block</class>
+            </onepageCheckout>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_view_info>Oggetto_OnepageCheckout_Block_Adminhtml_Order_View_Info</sales_order_view_info>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <resources>
+            <onepageCheckout_setup>
+                <setup>
+                    <module>Oggetto_OnepageCheckout</module>
+                    <class>Oggetto_OnepageCheckout_Model_Resource_Setup</class>
+                </setup>
+            </onepageCheckout_setup>
+        </resources>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <onepage>
+                    <file>onepage.xml</file>
+                </onepage>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <onepage translate="title">
+                                            <title>Onepage Checkout</title>
+                                        </onepage>
+                                        <custom_fields translate="title">
+                                            <title>Checkout Fields</title>
+                                        </custom_fields>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <onepage>
+            <general>
+                <enabled>1</enabled>
+                <title>Onepage Checkout</title>
+                <layout_columns>2</layout_columns>
+            </general>
+            <shipping>
+                <show_free_only>0</show_free_only>
+                <show_shipping_address_form>1</show_shipping_address_form>
+                <ship_same_address_checkbox_checked>1</ship_same_address_checkbox_checked>
+            </shipping>
+            <fields_setup>
+                <subscribe_newsletter_show>1</subscribe_newsletter_show>
+                <newsletter_checked_default>0</newsletter_checked_default>
+                <coupon_field_show>1</coupon_field_show>
+            </fields_setup>
+            <ajax>
+                <reload_methods_country_change>1</reload_methods_country_change>
+                <reload_shipping_methods_country_change>0</reload_shipping_methods_country_change>
+                <reload_shipping_methods_postal_change>1</reload_shipping_methods_postal_change>
+                <reload_shipping_methods_region_change>1</reload_shipping_methods_region_change>
+                <reload_order_totals_method_change>1</reload_order_totals_method_change>
+                <reload_order_totals_shipping_method_change>1</reload_order_totals_shipping_method_change>
+            </ajax>
+            <delivery_date_time>
+                <enabled>0</enabled>
+            </delivery_date_time>
+        </onepage>
+        <custom_fields>
+            <field1>
+                <name>field1</name>
+            </field1>
+            <field2>
+                <name>field2</name>
+            </field2>
+            <field3>
+                <name>field3</name>
+            </field3>
+            <field4>
+                <name>field4</name>
+            </field4>
+            <field5>
+                <name>field5</name>
+            </field5>
+        </custom_fields>
+    </default>
+</config>

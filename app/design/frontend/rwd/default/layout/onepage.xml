@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Oggetto Web checkout extension for Magento
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade
+* the Oggetto OnepageCheckout module to newer versions in the future.
+* If you wish to customize the Oggetto OnepageCheckout module for your needs
+* please refer to http://www.magentocommerce.com for more information.
+*
+* @category   design
+* @package    rwd_default
+* @copyright  Copyright (C) 2014 Oggetto Web ltd (http://oggettoweb.com/)
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<layout version="0.1.0">
+    <checkout_onepage_index>
+        <remove name="left"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <name>onepage/css/style.css</name>
+            </action>
+            <action method="addJs">
+                <script>varien/form.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/opcheckout.js</name>
+            </action>
+            <action method="addJs">
+                <script>prototype/validation.js</script>
+            </action>
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name></action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>onepage/js/script.js</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <remove name="checkout.onepage"/>
+            <block type="onepageCheckout/onepage" name="xxx.checkout.onepage" template="onepage/index.phtml">
+                <block type="onepageCheckout/onepage_billing" name="checkout.onepage.billing" as="billing"
+                       template="onepage/billing.phtml">
+                    <block type="onepageCheckout/onepage_billing" name="checkout.onepage.billing.register" as="register_data"
+                           template="onepage/billing/register.phtml" />
+                </block>
+                <block type="onepageCheckout/onepage_shipping" name="checkout.onepage.shipping" as="shipping"
+                       template="onepage/shipping.phtml" />
+                <block type="onepageCheckout/onepage_shipping" name="checkout.onepage.shipping_method" as="shipping_method"
+                       template="onepage/shipping/method.phtml">
+                    <block type="checkout/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="available" template="onepage/shipping/method/available.phtml" />
+                    <block type="onepageCheckout/onepage_shipping_method_datetime" name="checkout.onepage.shipping_method.datetime" as="datetime" template="onepage/shipping/method/datetime.phtml" />
+                </block>
+                <block type="onepageCheckout/onepage_payment" name="checkout.onepage.payment" as="payment"
+                       template="onepage/payment.phtml">
+                    <block type="checkout/onepage_payment_methods" name="checkout.payment.methods" as="methods" template="onepage/payment/methods.phtml">
+                        <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+                    </block>
+                </block>
+                <block type="checkout/cart_coupon" name="checkout.onepage.coupon" as="coupon" template="onepage/coupon.phtml"/>
+                <block type="onepageCheckout/onepage_additional" name="checkout.onepage.additional" as="additional"
+                       template="onepage/additional.phtml" />
+                <block type="onepageCheckout/onepage_review" name="checkout.onepage.review"
+                       as="review" template="onepage/review.phtml">
+                    <block type="onepageCheckout/onepage_review_items" name="checkout.onepage.review.items"
+                           as="items" template="onepage/review/items.phtml" />
+                    <block type="onepageCheckout/onepage_review_totals" name="checkout.onepage.review.info.totals" as="totals" template="onepage/review/totals.phtml" />
+                    <block type="onepageCheckout/onepage_agreements" name="checkout.onepage.agreements" as="agreements" template="onepage/agreements.phtml" />
+                    <block type="core/template" name="checkout.onepage.review.button" as="button" template="onepage/review/button.phtml"/>
+                </block>
+            </block>
+        </reference>
+        <remove name="right"/>
+    </checkout_onepage_index>
+
+    <checkout_shipping_getmethods>
+        <reference name="content">
+            <block type="checkout/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="available" template="onepage/shipping/method/available.phtml"/>
+        </reference>
+    </checkout_shipping_getmethods>
+
+    <checkout_shipping_savemethod>
+        <reference name="content">
+            <block type="onepageCheckout/onepage_review_totals" name="checkout.onepage.review.info.totals" as="totals" template="onepage/review/totals.phtml"/>
+            <block type="onepageCheckout/onepage_shipping_method_datetime" name="checkout.onepage.shipping_method.datetime" as="datetime" template="onepage/shipping/method/datetime.phtml"/>
+        </reference>
+    </checkout_shipping_savemethod>
+
+    <checkout_payment_getmethods>
+        <reference name="content">
+            <block type="checkout/onepage_payment_methods" name="checkout.payment.methods" as="methods" template="onepage/payment/methods.phtml">
+                <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+            </block>
+        </reference>
+    </checkout_payment_getmethods>
+
+    <checkout_review_gettotals>
+        <reference name="content">
+            <block type="onepageCheckout/onepage_review_totals" name="checkout.onepage.review.info.totals" as="totals" template="onepage/review/totals.phtml"/>
+        </reference>
+    </checkout_review_gettotals>
+
+    <checkout_review_getbutton>
+        <reference name="content">
+            <block type="core/template" name="checkout.onepage.review.button" as="button" template="onepage/review/button.phtml"/>
+        </reference>
+    </checkout_review_getbutton>
+
+    <checkout_coupon_update>
+        <reference name="content">
+            <block type="onepageCheckout/onepage_review_totals" name="checkout.onepage.review.info.totals" as="totals" template="onepage/review/totals.phtml"/>
+        </reference>
+    </checkout_coupon_update>
+</layout>

@@ -1,0 +1,22 @@
+{
+    "name": "oggettoweb/onepageCheckout",
+    "type": "magento-module",
+    "license": "OSL-3.0",
+    "description": "Mangeto easy configurable extension for checkout",
+    "authors":[
+        {
+            "name": "Eduard Paliy",
+            "email": "epaliy@oggettoweb.com"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*",
+        "oggettoweb/ajax": "1.*"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/OggettoWeb/ajax"
+        }
+    ]
+}
