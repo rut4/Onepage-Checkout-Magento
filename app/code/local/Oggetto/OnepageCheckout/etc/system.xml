@@ -81,15 +81,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </registration_mode>
-                        <!--<checkout_redirect translate="label">
-                            <label>Redirect to checkout after adding an item to the shopping cart</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>5</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </checkout_redirect>-->
                     </fields>
                 </general>
                 <shipping translate="shipping" module="onepageCheckout">
@@ -163,14 +154,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </default_method>
-                        <!--<register_paypal translate="label">
-                            <label>Register customer during Paypal Express checkout if prompted</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>1</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </register_paypal>-->
                     </fields>
                 </payment>
                 <fields_setup translate="label" module="onepageCheckout">
@@ -198,15 +181,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </newsletter_checked_default>
-                        <!--<comment_field_show translate="label">
-                            <label>Show comment field</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>3</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </comment_field_show>-->
                         <coupon_field_show translate="label">
                             <label>Show Discount Coupon Field</label>
                             <frontend_type>select</frontend_type>
@@ -216,62 +190,8 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </coupon_field_show>
-                        <!--<giftcard_field_show translate="label">
-                            <label>Show Giftcard Field</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>5</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </giftcard_field_show>-->
-                        <!--<address_review_show translate="label">
-                            <label>Show Address Review Block</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>6</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </address_review_show>-->
                     </fields>
                 </fields_setup>
-                <!--<additional_content translate="label" module="onepageCheckout">
-                    <label>Additional content</label>
-                    <sort_order>500</sort_order>
-                    <show_in_default>1</show_in_default>
-                    <show_in_website>1</show_in_website>
-                    <show_in_store>1</show_in_store>
-                    <fields>
-                        <above_form translate="label">
-                            <label>Above form</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>1</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </above_form>
-                        <below_form translate="label">
-                            <label>Below form</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>2</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </below_form>
-                        <checkout_review_table translate="label">
-                            <label>Below checkout review table</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>3</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </checkout_review_table>
-                    </fields>
-                </additional_content>-->
                 <address_fields translate="label" module="onepageCheckout">
                     <label>Address Form Fields</label>
                     <sort_order>600</sort_order>
@@ -531,31 +451,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </use_calendar>
-                        <!--<delivery_start_available translate="label">
-                            <label>Delivery will be available since order date plus this value</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>5</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </delivery_start_available>
-                        <delivery_available translate="label">
-                            <label>Period in days when delivery will be available, since first available day</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>6</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </delivery_available>
-                        <exclude_weekend_days translate="label">
-                            <label>Exclude the Weekend Days</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>7</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </exclude_weekend_days>-->
                         <dates_to_exclude>
                             <label>Dates to Exclude</label>
                             <frontend_model>onepageCheckout/adminhtml_config_excludeDates</frontend_model>
@@ -592,40 +487,6 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <!--<edit_cart_contents translate="label">
-                            <label>Allow to edit shopping cart contents</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>1</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </edit_cart_contents>-->
-                        <!--<show_product_image translate="label">
-                            <label>Show product image</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>2</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </show_product_image>-->
-                        <!--<image_width translate="label">
-                            <label>Width</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>3</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </image_width>
-                        <image_height translate="label">
-                            <label>Height</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>4</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </image_height>-->
                         <product_name_as_link translate="label">
                             <label>Show product name as link</label>
                             <frontend_type>select</frontend_type>
@@ -635,23 +496,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </product_name_as_link>
-                        <!--<show_product_description translate="label">
-                            <label>Show product short description</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>6</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </show_product_description>
-                        <description_excerpt_length translate="label">
-                            <label>Description Excerpt Length</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>7</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </description_excerpt_length>-->
                     </fields>
                 </shopping_cart>
             </groups>
