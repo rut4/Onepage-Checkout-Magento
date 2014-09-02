@@ -33,7 +33,7 @@
 class Oggetto_OnepageCheckout_Block_Onepage_Review_Items extends Mage_Checkout_Block_Onepage_Review_Info
 {
     /**
-     * Should show product name sa link
+     * Should show product name as link
      *
      * @return bool
      */
