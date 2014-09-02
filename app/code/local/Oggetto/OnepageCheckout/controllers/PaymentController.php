@@ -60,6 +60,6 @@ class Oggetto_OnepageCheckout_PaymentController extends Oggetto_OnepageCheckout_
         $data = $this->getRequest()->getPost('payment', array());
 
         /** @var Oggetto_OnepageCheckout_Model_Onepage $onepage */
-        $this->_helper()->getOnepage()->savePayment($data);;
+        $this->_helper()->getOnepage()->savePayment($data);
     }
 }
