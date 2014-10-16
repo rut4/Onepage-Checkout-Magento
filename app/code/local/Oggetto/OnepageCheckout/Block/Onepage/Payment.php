@@ -63,7 +63,7 @@ class Oggetto_OnepageCheckout_Block_Onepage_Payment extends Mage_Checkout_Block_
     }
 
     /**
-     * Should reload payment methods on order totals change
+     * Should reload payment methods on oreder totals change
      *
      * @return bool
      */

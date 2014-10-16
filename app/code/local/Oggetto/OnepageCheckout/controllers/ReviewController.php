@@ -115,7 +115,9 @@ class Oggetto_OnepageCheckout_ReviewController extends Oggetto_OnepageCheckout_A
                 $delivery->save();
             }
             $this->_saveAdditional($additional);
-            $this->_redirect('checkout/onepage/success');
+            // $this->_redirect('checkout/onepage/success');
+            $response->success()
+                ->setRedirect(Mage::getUrl('checkout/onepage/success'));
         } catch (Exception $e) {
             Mage::logException($e);
             $response->error()

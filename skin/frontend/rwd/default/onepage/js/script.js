@@ -241,9 +241,6 @@ function OpShipping (getUrl, $form) {
                 $j('#deliveryDateAndTime').remove();
                 Object.isFunction(success) && success(data);
             },
-            error: function () {
-                setError('Server connection error.');
-            },
             complete: function () {
                 saveMethodXhr = null;
             }
@@ -618,7 +615,8 @@ $j(function () {
                     }
                     if (data && data.status) {
                         if (data.status == 'success') {
-                            $j('#onepageWrapper').html(data.message);
+                            //$j('#onepageWrapper').html(data.message);
+                            window.location.replace(data.redirect);
                         } else {
                             $reviewErrors.html(data.message);
                         }

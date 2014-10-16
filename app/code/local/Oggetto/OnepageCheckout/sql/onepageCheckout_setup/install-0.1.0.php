@@ -1,6 +1,6 @@
 <?php
 /**
- * Oggetto Web checkout extension for Magento
+ * Oggetto Web chekcout extension for Magento
  *
  * NOTICE OF LICENSE
  *
